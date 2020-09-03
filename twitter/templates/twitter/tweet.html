@@ -1,0 +1,61 @@
+{% extends 'twitter/base.html' %} {% load crispy_forms_tags %} {% load static %} 
+{% block content %}
+
+<div class="container">
+  <div class="row">
+    <div class="profile" style="margin-top: 40px;">
+    <div class="col">
+      {% if user.is_authenticated %}
+      <h2>
+        Welcome, <small>{{ user.username }}</small>!
+      </h2>
+      <img src="{{ profile.profile_pic.url }}"/>
+      <button><a href="{% url 'logout' %}">logout</a></button>
+      {% else %}
+        <h5>Login  <a href="{% url 'login' %}">login</a></h5>
+        <h6>New User? <a href="{% url 'signup' %}">Sign Up</a></h6>
+      {% endif %}
+
+    </div>
+    </div>
+    <div class="col">
+        <div class="form" style="margin-top: 20px; margin-bottom: 50px;">
+        {% if form != '' %}
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %} {{ form|crispy }}
+            <button type="submit" class="btn btn-primary btn-block">
+              Submit
+            </button>
+        </form>
+        {% endif %}
+        </div>
+        <div class="thoughts">
+            {% for tweet in thoughts %}
+                <h5><img src="{{ tweet.user.profile_pic.url }}"/> {{ tweet.user.user.username }}</h5>
+                <p> {{ tweet.tweet }}</p>
+                <h6>Likes: {{ tweet.total_likes }} <a href="{% url 'tweet_like' tweet.id %}"> 
+                <span style="padding-left: 35px; color: #bfc2b4; cursor: pointer;">
+                <i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i>
+                </span></a></h6>
+            <hr>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col">
+        <div class="users" style="margin-top: 20px;">
+        {% for user in users %}
+        <div class=row>
+            <div class="col">
+                <h4>{{ user.user.username }}</h4>
+            </div>
+            <div class="col">
+                <button>Follow</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

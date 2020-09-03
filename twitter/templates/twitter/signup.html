@@ -1,0 +1,53 @@
+{% extends 'twitter/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+
+{% block content %}
+
+  
+
+  <div class="container-fluid" style="background-image: url({% static 'img/back.jpg' %})">
+   <form  method="POST" enctype="multipart/form-data" >
+  
+    {% csrf_token %}
+    <div class="card pt-2 pb-2 pl-3 pr-3" style="background-image: url({% static 'images/back1.jpg' %})">
+      <div class="title" align="center">
+        <h2 class="btn btn-info" >User Registration Form</h2>
+
+      </div>
+    <div class="row">
+      <div class="col-md-1"></div>
+      <div class="col-md-5 pt-2 pb-2" style="background-color: blue">
+        <div class="card pt-2 pb-4 pl-2 pr-2" style="background-image: url({% static 'images/back1.jpg' %})">
+          <div>
+            {{ form1.username|as_crispy_field }}
+          </div>
+          <div>
+            {{ form1.email|as_crispy_field }}
+          </div>
+          <div>
+            {{ form1.password1|as_crispy_field }}
+          </div>
+          <div>
+            {{ form1.password2|as_crispy_field }}
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5 pt-2 " style="background-color:blue;">
+        <div class="card pt-2 pl-2 pr-2" style="background-image: url({% static 'images/back1.jpg' %})">
+          <div>
+              {{ form2.profile_pic|as_crispy_field }}
+          </div> 
+
+          <div class="pt-2 pb-2">
+            <center><button  class="btn btn-outline-primary"><input type="submit" value="Register" name=""></button> </center>
+          </div>
+        </div>
+      </div>
+      </div>
+  </form>
+  </div>
+
+
+  {% endblock %}

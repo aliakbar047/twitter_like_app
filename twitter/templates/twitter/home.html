@@ -1,0 +1,16 @@
+{% extends 'twitter/base.html' %} {% block content %}
+
+<div class="home">
+  <div class="row">
+    <div class="col">
+      <h2>
+        Welcome, {{ user.get_full_name }} <small>{{ user.username }}</small>!
+      </h2>
+      <img src="{{ profile.profile_pic.url }}" />
+    </div>
+    <div class="col"></div>
+    <div class="col"></div>
+  </div>
+</div>
+
+{% endblock %}
